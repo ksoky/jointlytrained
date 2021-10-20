@@ -515,6 +515,34 @@ def get_parser(parser=None, required=True):
     )
     parser.add_argument("--fbank-fmin", type=float, default=0.0, help="")
     parser.add_argument("--fbank-fmax", type=float, default=None, help="")
+
+    #for join training
+    parser.add_argument(
+        "--join-train",
+        default="asr",
+        type=str,
+        choices=[
+            "asr",
+            "mt",
+            "st",
+        ],
+        help="Checking whether join training with MT or ST.",
+    )
+    parser.add_argument(
+        "--asr-weight",
+        default=0.0,
+        type=float,
+        help="Multitask learning coefficient for ASR task, weight: "
+        " asr_weight*(alpha*ctc_loss + (1-alpha)*att_loss)"
+        " + (1-asr_weight-mt_weight)*st_loss",
+    )
+    parser.add_argument(
+        "--mt-weight",
+        default=0.0,
+        type=float,
+        help="Multitask learning coefficient for MT task, weight: \
+                mt_weight*mt_loss + (1-mt_weight-asr_weight)*st_loss",
+    )
     return parser
 
 
@@ -625,7 +653,10 @@ def main(cmd_args):
 
             train(args)
         elif args.backend == "pytorch":
-            from espnet.asr.pytorch_backend.asr import train
+            if args.join_train != "asr":
+                from espnet.asr.pytorch_backend.asr_mtst import train
+            else:
+                from espnet.asr.pytorch_backend.asr import train
 
             train(args)
         else:

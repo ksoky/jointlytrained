@@ -22,7 +22,7 @@ seed=1          # seed to generate random number
 # feature configuration
 do_delta=false
 
-preprocess_config=conf/specaug.yaml
+preprocess_config= #conf/specaug.yaml
 train_config=conf/train.yaml
 lm_config=conf/lm.yaml
 decode_config=conf/decode.yaml
@@ -48,12 +48,12 @@ src_case=lc.rm
 # Set this to somewhere where you want to put your data, or where
 # someone else has already put it.  You'll want to change this
 # if you're not on the CLSP grid.
-sfisher_speech=/export/corpora/LDC/LDC2010S01
-sfisher_transcripts=/export/corpora/LDC/LDC2010T04
+sfisher_speech=~/work1/data/fisher_callhome_spanish/links/LDC2010S01
+sfisher_transcripts=~/work1/data/fisher_callhome_spanish/links/LDC2010T04
 split=local/splits/split_fisher
 
-callhome_speech=/export/corpora/LDC/LDC96S35
-callhome_transcripts=/export/corpora/LDC/LDC96T17
+callhome_speech=~/work1/data/fisher_callhome_spanish/links/LDC96S35
+callhome_transcripts=~/work1/data/fisher_callhome_spanish/links/LDC96T17
 split_callhome=local/splits/split_callhome
 
 # bpemode (unigram or bpe)

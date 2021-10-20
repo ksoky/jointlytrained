@@ -258,6 +258,19 @@ def get_parser():
         help="Threshold probability for CTC output",
     )
 
+    #for join training
+    parser.add_argument(
+        "--join-train",
+        default="asr",
+        type=str,
+        choices=[
+            "asr",
+            "mt",
+            "st",
+        ],
+        help="Checking whether join training with MT or ST.",
+    )
+
     return parser
 
 
@@ -332,7 +345,10 @@ def main(args):
 
                     recog_v2(args)
                 else:
-                    from espnet.asr.pytorch_backend.asr import recog
+                    if args.join_train != "asr":
+                        from espnet.asr.pytorch_backend.asr_mtst import recog
+                    else:
+                        from espnet.asr.pytorch_backend.asr import recog
 
                     if args.dtype != "float32":
                         raise NotImplementedError(

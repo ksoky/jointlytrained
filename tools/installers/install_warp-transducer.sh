@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -euo pipefail
 
 
@@ -28,6 +28,6 @@ git clone https://github.com/HawkAaron/warp-transducer.git
 
     (
         set -euo pipefail
-        cd pytorch_binding && python3 setup.py install
+        cd pytorch_binding && python3 -m pip install -e .
     )
 )
