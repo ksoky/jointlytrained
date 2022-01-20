@@ -142,7 +142,7 @@ class DecoderLayer(nn.Module):
         #     x = self.dropout(self.src_attn(x, mt_memory, mt_memory, mt_memory_mask))
         
         #x = self.concat_attention(torch.cat((y, z), dim=-1))
-        x = residual + x + y + z
+        x = residual + y + z
 
         if not self.normalize_before:
             x = self.norm2(x)
